@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Subscriberry.core.Model;
-
 namespace Subscriberry.EntityFramework.DataAccess.Mapping
 {
 	internal class SubscriptionMap : DbEntityConfiguration<Subscription>

@@ -23,8 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Subscriberry.core\Subscriberry.core.csproj" />
     <ProjectReference Include="..\Subscriberry.EntityFramework\Subscriberry.EntityFramework.csproj" />
-    <ProjectReference Include="..\subscriberry\Subscriberry.core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subscriberry.core", "subscriberry\Subscriberry.core.csproj", "{F0AE9C8B-5695-41E3-98F6-3776E5F36074}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subscriberry.core", "Subscriberry.core\Subscriberry.core.csproj", "{F0AE9C8B-5695-41E3-98F6-3776E5F36074}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subscriberry.EntityFramework", "Subscriberry.EntityFramework\Subscriberry.EntityFramework.csproj", "{F587FDF7-2C15-4C55-8AA6-9E23AAE6E848}"
 EndProject
