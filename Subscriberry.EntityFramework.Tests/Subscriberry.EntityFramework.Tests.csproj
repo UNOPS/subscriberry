@@ -2,6 +2,16 @@
 
   <PropertyGroup>    
     <TargetFramework>netcoreapp1.1</TargetFramework>
+	  <PackageId>Subscriberry.EntityFramework.Tests</PackageId>
+	  <PackageVersion>0.0.1-beta</PackageVersion>
+	  <Authors>UNOPS</Authors>
+	  <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+	  <Copyright>Copyright 2017 (c) UNOPS. All rights reserved.</Copyright>
+	  <PackageTags>Subscription</PackageTags>
+	  <Version>0.0.1-beta</Version>
+	  <NeutralLanguage />
+	  <Description>Subsriberry is a very simple .NET Standard library to help manage subscription inside your app. This package includes core functionality without any storage implementation.</Description>
+	  <PackageProjectUrl>https://github.com/UNOPS/subscriberry</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
