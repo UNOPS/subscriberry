@@ -1,31 +1,42 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Subscriberry.core.Model;
-using Subscriberry.EntityFramework.DataAccess.Mapping;
-using Subscriberry.EntityFramework.Extenions;
-
-namespace Subscriberry.EntityFramework.DataAccess
+﻿namespace Subscriberry.EntityFramework.DataAccess
 {
-	internal class SubscriberryDbContext : DbContext
-	{
-		public SubscriberryDbContext(DbContextOptions options) : base(options)
-		{
-		}
+    using Microsoft.EntityFrameworkCore;
+    using Subscriberry.core.Model;
+    using Subscriberry.EntityFramework.DataAccess.Mapping;
+    using Subscriberry.EntityFramework.Extenions;
 
+    internal class SubscriberryDbContext : DbContext
+    {
+        private const string DefaultConnectionString =
+            "Server=(localdb)\\mssqllocaldb;Database=subscriberry;Trusted_Connection=True;MultipleActiveResultSets=true";
 
-		public virtual DbSet<Subscription> Subscriptions { get; set; }
-		public virtual DbSet<SubscriptionGroup> Groups { get; set; }
-		public virtual DbSet<UserSubscription> UserSubscriptions { get; set; }
-		public virtual DbSet<SubscriptionRole> SubscriptionRoles { get; set; }
+        private readonly string schema;
 
-		protected override void OnModelCreating(ModelBuilder builder)
-		{
-			base.OnModelCreating(builder);
+        public SubscriberryDbContext()
+            : this(new DbContextOptionsBuilder().UseSqlServer(DefaultConnectionString).Options, "dbo")
+        {
+        }
 
-			builder.HasDefaultSchema("sbsc");
-			builder.AddConfiguration(new SubscriptionMap());
-			builder.AddConfiguration(new SubscriptionGroupMap());
-			builder.AddConfiguration(new UserSubscriptionMap());
-			builder.AddConfiguration(new SubscriptionRoleMap());
-		}
-	}
+        public SubscriberryDbContext(DbContextOptions options, string schema) : base(options)
+        {
+            this.schema = schema;
+        }
+
+        public virtual DbSet<SubscriptionGroup> SubscriptionGroups { get; set; }
+        public virtual DbSet<SubscriptionRole> SubscriptionRoles { get; set; }
+        public virtual DbSet<Subscription> Subscriptions { get; set; }
+        public virtual DbSet<UserSubscription> UserSubscriptions { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.HasDefaultSchema(this.schema);
+
+            builder.AddConfiguration(new SubscriptionMap(this.schema));
+            builder.AddConfiguration(new SubscriptionGroupMap(this.schema));
+            builder.AddConfiguration(new UserSubscriptionMap(this.schema));
+            builder.AddConfiguration(new SubscriptionRoleMap(this.schema));
+        }
+    }
 }

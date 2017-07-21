@@ -1,27 +1,27 @@
 ﻿namespace Subscriberry.core.Model
 {
-	public class Subscription
-	{
-		public Subscription(int id, string name, int? groupId)
-		{
-			Id = id;
-			Name = name;
-			GroupId = groupId;
-		}
+    public class Subscription
+    {
+        public Subscription(int id, string name, int? groupId)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.GroupId = groupId;
+        }
 
-		public Subscription(int id, int? groupId)
-		{
-			Id = id;
-			GroupId = groupId;
-		}
+        public Subscription(int id, int? groupId)
+        {
+            this.Id = id;
+            this.GroupId = groupId;
+        }
 
-		public Subscription()
-		{
-		}
+        protected Subscription()
+        {
+        }
 
-		public virtual SubscriptionGroup Group { get; set; }
-		public int? GroupId { get; set; }
-		public int Id { get; set; }
-		public string Name { get; set; }
-	}
+        public virtual SubscriptionGroup Group { get; protected set; }
+        public int? GroupId { get; set; }
+        public int Id { get; protected set; }
+        public string Name { get; protected set; }
+    }
 }

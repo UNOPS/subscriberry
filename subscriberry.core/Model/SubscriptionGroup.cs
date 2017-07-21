@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-
-namespace Subscriberry.core.Model
+﻿namespace Subscriberry.core.Model
 {
-	public class SubscriptionGroup
-	{
-		public int Id { get; set; }
-		public string Name { get; set; }
+    using System.Collections.Generic;
 
-		public virtual IEnumerable<Subscription> Subscriptions { get; set; }
-	}
+    public class SubscriptionGroup
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public virtual IEnumerable<Subscription> Subscriptions { get; set; }
+    }
 }

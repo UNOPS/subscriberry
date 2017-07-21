@@ -1,20 +1,20 @@
 ﻿namespace Subscriberry.core.Model
 {
-	public class UserSubscription
-	{
-		public UserSubscription()
-		{
-		}
+    public class UserSubscription
+    {
+        protected UserSubscription()
+        {
+        }
 
-		public UserSubscription(int subscriptionId, string userId)
-		{
-			SubscriptionId = subscriptionId;
-			UserId = userId;
-		}
+        public UserSubscription(int subscriptionId, string userId)
+        {
+            this.SubscriptionId = subscriptionId;
+            this.UserId = userId;
+        }
 
-		public int SubscriptionId { get; set; }
-		public string UserId { get; set; }
+        public virtual Subscription Subscription { get; set; }
 
-		public virtual Subscription Subscription { get; set; }
-	}
+        public int SubscriptionId { get; protected set; }
+        public string UserId { get; protected set; }
+    }
 }

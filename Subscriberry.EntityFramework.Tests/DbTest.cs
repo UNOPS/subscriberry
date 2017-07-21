@@ -1,53 +1,47 @@
-using System;
-using System.Linq;
-using Subscriberry.core;
-using Xunit;
-
 namespace Subscriberry.EntityFramework.Tests
 {
-	[Collection(nameof(DatabaseCollectionFixture))]
-	public class DbTest
-	{
-		public DbTest(DatabaseFixture dbFixture)
-		{
-			this.dbFixture = dbFixture;
-		}
+    using System.Linq;
+    using Subscriberry.core;
+    using Xunit;
 
-		private readonly DatabaseFixture dbFixture;
+    [Collection(nameof(DatabaseCollectionFixture))]
+    public class DbTest
+    {
+        public DbTest(DatabaseFixture dbFixture)
+        {
+            this.subscriptionRepository = new SubscriptionRepository(dbFixture.CreateDataContext());
+        }
 
-		[Fact]
-		public void CanAttachToContext()
-		{
-			var repository = new SubscriptionRepository(this.dbFixture.CreateDataContext());
-			var service = new SubscriptionService(repository);
-			service.EnsureSubscriptionData(1, "Test", "Group1");
+        private readonly ISubscriptionRepository subscriptionRepository;
 
-			var subsc = service.GetAllSubscriptions();
+        [Fact]
+        public void AssignSubscriptionToRole()
+        {
+            var service = new SubscriptionService(this.subscriptionRepository);
+            service.AddSubscriptionRoles(1, new[] { 1, 2 });
+            var subscription = service.GetRoleSubscriptions(1);
 
-			Assert.True(subsc.Any());
-		}
+            Assert.True(subscription.Any());
+        }
 
-		[Fact]
-		public void AssignSubscriptionToRole()
-		{
-			var repository = new SubscriptionRepository(this.dbFixture.CreateDataContext());
-			var service = new SubscriptionService(repository);
-			service.AddSubscriptionRoles(1, new[] { 1, 2 });
-			var subscription = service.GetRoleSubscriptions(1);
-			Assert.True(subscription.Any());
-		}
+        [Fact]
+        public void CanAttachToContext()
+        {
+            var service = new SubscriptionService(this.subscriptionRepository);
+            service.EnsureSubscriptionData(1, "Test", "Group1");
+            var subsc = service.GetAllSubscriptions();
 
-		[Fact]
-		public void CanUserSubscribe()
-		{
-			var repository = new SubscriptionRepository(this.dbFixture.CreateDataContext());
-			var service = new SubscriptionService(repository);
-			service.EnsureSubscribe("1", new[] { 1 }, new[] { 1 });
-			var subscription = service.GetUserSubscriptions("1");
+            Assert.True(subsc.Any());
+        }
 
-			Assert.True(subscription.Any());
-		}
+        [Fact]
+        public void CanUserSubscribe()
+        {
+            var service = new SubscriptionService(this.subscriptionRepository);
+            service.EnsureSubscribe("1", new[] { 1 }, new[] { 1 });
+            var subscription = service.GetUserSubscriptions("1");
 
-
-	}
+            Assert.True(subscription.Any());
+        }
+    }
 }

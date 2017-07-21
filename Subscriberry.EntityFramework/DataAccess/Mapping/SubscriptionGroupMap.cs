@@ -4,22 +4,21 @@
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using Subscriberry.core.Model;
 
-    internal class SubscriptionMap : DbEntityConfiguration<Subscription>
+    internal class SubscriptionGroupMap : DbEntityConfiguration<SubscriptionGroup>
     {
         private readonly string schema;
 
-        public SubscriptionMap(string schema)
+        public SubscriptionGroupMap(string schema)
         {
             this.schema = schema;
         }
 
-        public override void Configure(EntityTypeBuilder<Subscription> entity)
+        public override void Configure(EntityTypeBuilder<SubscriptionGroup> entity)
         {
-            entity.ToTable("Subscription", this.schema);
+            entity.ToTable("Group", this.schema);
             entity.HasKey(t => t.Id);
             entity.Property(t => t.Id).HasColumnName("Id").UseSqlServerIdentityColumn();
-            entity.Property(t => t.Name).HasColumnName("Name").HasMaxLength(100);
-            entity.HasOne(t => t.Group).WithMany(t => t.Subscriptions).HasForeignKey(t => t.GroupId);
+            entity.Property(t => t.Name).HasColumnName("Name").HasMaxLength(50).IsUnicode(false);
         }
     }
 }
