@@ -2,6 +2,7 @@ namespace Subscriberry.EntityFramework.Tests
 {
     using System.Linq;
     using Subscriberry.core;
+    using Subscriberry.core.Model;
     using Xunit;
 
     [Collection(nameof(DatabaseCollectionFixture))]
@@ -42,6 +43,15 @@ namespace Subscriberry.EntityFramework.Tests
             var subscription = service.GetUserSubscriptions("1");
 
             Assert.True(subscription.Any());
+        }
+
+        [Fact]
+        public void CreateSubscription()
+        {
+            var subscription = new Subscription("New user", null);
+            this.subscriptionRepository.AddSubscription(subscription);
+
+            Assert.NotEqual(0, subscription.Id);
         }
     }
 }

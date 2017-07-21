@@ -2,16 +2,14 @@
 {
     public class Subscription
     {
-        public Subscription(int id, string name, int? groupId)
+        public Subscription(string name, int? groupId)
         {
-            this.Id = id;
             this.Name = name;
             this.GroupId = groupId;
         }
 
-        public Subscription(int id, int? groupId)
+        public Subscription(int groupId)
         {
-            this.Id = id;
             this.GroupId = groupId;
         }
 

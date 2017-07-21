@@ -131,7 +131,7 @@
                 into uSubscriptions
                 from data in uSubscriptions.DefaultIfEmpty()
                 where roles.Contains(sr.RoleId)
-                select new UserSubscribed { Subscribed = uSubscriptions.Any(), Subscription = s };
+                select new UserSubscribed(uSubscriptions.Any(), s);
 
             var temp = result.ToList();
             return temp.DistinctBy(t => t.Subscription.Id).GroupBy(t => t.Subscription.Group);
@@ -231,10 +231,7 @@
                 return data;
             }
 
-            var newGroup = this.dbContext.SubscriptionGroups.Add(new SubscriptionGroup
-            {
-                Name = name
-            });
+            var newGroup = this.dbContext.SubscriptionGroups.Add(new SubscriptionGroup(name));
             this.dbContext.SaveChanges();
             return newGroup.Entity;
         }
@@ -314,7 +311,7 @@
             }
 
             var data = this.EnsureGroup(group);
-            this.dbContext.Subscriptions.Add(new Subscription(subscriptionId, subscriptionEvent, data.Id));
+            this.dbContext.Subscriptions.Add(new Subscription(subscriptionEvent, data.Id));
             this.dbContext.SaveChanges();
         }
 

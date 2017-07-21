@@ -12,7 +12,7 @@
             this.UserId = userId;
         }
 
-        public virtual Subscription Subscription { get; set; }
+        public virtual Subscription Subscription { get; protected set; }
 
         public int SubscriptionId { get; protected set; }
         public string UserId { get; protected set; }

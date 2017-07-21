@@ -2,7 +2,17 @@
 {
     public class UserSubscribed
     {
-        public bool Subscribed { get; set; }
-        public Subscription Subscription { get; set; }
+        protected UserSubscribed()
+        {
+        }
+
+        public UserSubscribed(bool subscribed, Subscription subscription)
+        {
+            this.Subscribed = subscribed;
+            this.Subscription = subscription;
+        }
+
+        public bool Subscribed { get; protected set; }
+        public Subscription Subscription { get; protected set; }
     }
 }
