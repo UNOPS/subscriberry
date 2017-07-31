@@ -1,6 +1,5 @@
 ﻿namespace Subscriberry.EntityFramework
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.EntityFrameworkCore;
@@ -267,7 +266,7 @@
             var subscriptionData = this.dbContext.Subscriptions.Include(t => t.Group).FirstOrDefault(s => s.Id == subscriptionId);
             if (subscriptionData == null)
             {
-                throw new Exception("Subscription is not registered");
+                throw new SubscriptionException("Subscription is not registered");
             }
 
             var subscriptionGroup = subscriptionData.Group;
@@ -287,7 +286,7 @@
             var subscriptionData = this.dbContext.Subscriptions.Find(subscriptionId);
             if (subscriptionData == null)
             {
-                throw new Exception("Subscription is not registered");
+                throw new SubscriptionException("Subscription is not registered");
             }
 
             var subscriptionRoles = this.dbContext.SubscriptionRoles.Where(s => s.SubscriptionId == subscriptionId).ToList();
