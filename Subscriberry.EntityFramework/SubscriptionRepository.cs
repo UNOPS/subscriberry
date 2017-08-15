@@ -274,6 +274,8 @@
             {
                 subscriptionData.GroupId = this.EnsureGroup(group).Id;
             }
+
+            this.dbContext.SaveChanges();
         }
 
         /// <summary>
