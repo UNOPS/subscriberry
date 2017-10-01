@@ -1,10 +1,10 @@
-﻿namespace Subscriberry.EntityFramework.Helper
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-    internal class PaginatedData<T>
-    {
-        public IEnumerable<T> Results { get; set; }
-        public int TotalCount { get; set; }
-    }
+namespace Subscriberry.EntityFramework.Helper
+{
+	internal class PaginatedData<T>
+	{
+		public IEnumerable<T> Results { get; set; }
+		public int TotalCount { get; set; }
+	}
 }

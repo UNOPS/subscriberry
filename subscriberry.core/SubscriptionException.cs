@@ -1,15 +1,15 @@
-﻿namespace Subscriberry.core
+﻿using System;
+
+namespace Subscriberry.core
 {
-    using System;
+	public class SubscriptionException : Exception
+	{
+		public SubscriptionException(string message) : base(message)
+		{
+		}
 
-    public class SubscriptionException : Exception
-    {
-        public SubscriptionException(string message) : base(message)
-        {
-        }
-
-        public SubscriptionException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-    }
+		public SubscriptionException(string message, Exception innerException) : base(message, innerException)
+		{
+		}
+	}
 }
